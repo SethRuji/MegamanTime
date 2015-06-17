@@ -1,0 +1,38 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "hedgehogs265",
+    "longName": "Megaman",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/converted (2).png",
+                "name": "IMAGE_MEGAMAN_JUMP",
+                "type": "png"
+            },
+            {
+                "file": "fonts/megaman_2.ttf",
+                "name": "FONT_MEGAMAN_24",
+                "type": "font"
+            },
+            {
+                "file": "fonts/perfect-dos-vga.ttf",
+                "name": "FONT_PERFECT_DOS_48",
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Megaman",
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "uuid": "1d2d41dc-c2e8-40bc-9678-9baf5354c6a7",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
