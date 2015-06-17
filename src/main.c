@@ -4,7 +4,7 @@ static Window *s_main_window;
 static TextLayer *s_time_layer;
 static GFont s_time_font;
 static BitmapLayer *s_background_layer;
-static GBitmap *s_background_bitmap;
+static GBitmap *s_background_bitmaps[2];
 static TextLayer *s_peb_battery_layer;
 static TextLayer *s_bt_layer;
 static TextLayer *s_date_layer;
@@ -34,9 +34,10 @@ static void main_window_load(Window *window) {
 	 GRect window_bounds = layer_get_bounds(window_layer);
 	
 	// Create GBitmap, then set to created BitmapLayer
-	s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_MEGAMAN_JUMP);
+	s_background_bitmaps[0] = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_MEGAMAN_JUMP);
+	s_background_bitmaps[1] = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_MEGAMAN_ICE);
 	s_background_layer = bitmap_layer_create(GRect(0, 0, 144, 140));
-	bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
+	bitmap_layer_set_bitmap(s_background_layer, s_background_bitmaps[0]);
 	layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_background_layer));
 
 	// Create TIME TextLayer
@@ -75,8 +76,9 @@ static void main_window_load(Window *window) {
 }
 
 static void main_window_unload(Window *window) {
-	// Destroy GBitmap
-	gbitmap_destroy(s_background_bitmap);
+	// Destroy GBitmaps
+	gbitmap_destroy(s_background_bitmaps[0]);
+	gbitmap_destroy(s_background_bitmaps[1]);
 
 	// Destroy BitmapLayer
 	bitmap_layer_destroy(s_background_layer);
@@ -120,6 +122,12 @@ static void update_time() {
     // Use 12 hour format
     strftime(buffer, sizeof("00:00"), "%I:%M", tick_time);
   }
+	
+	if(tick_time->tm_min % 2 ==0){
+		bitmap_layer_set_bitmap(s_background_layer, s_background_bitmaps[0]);
+	}else{
+		bitmap_layer_set_bitmap(s_background_layer, s_background_bitmaps[1]);
+	}
 
   // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, buffer);

@@ -9,6 +9,11 @@
     "resources": {
         "media": [
             {
+                "file": "images/ice.png",
+                "name": "IMAGE_MEGAMAN_ICE",
+                "type": "png"
+            },
+            {
                 "file": "images/converted (2).png",
                 "name": "IMAGE_MEGAMAN_JUMP",
                 "type": "png"
