@@ -78,9 +78,9 @@
         if (window.localStorage.tutorial) {
           ls_pto = JSON.parse(window.localStorage.tutorial);
           // the Pebble webview dies on the next line...
-          $("input[name=key0][id=key0-"+ls_pto["option0"]+"]").prop('checked',true);
+          $("input[name=key0][id=key0-"+ls_pto["powerUp"]+"]").prop('checked',true);
           $("input[name=key0]").checkboxradio('refresh');
-          $("input[name=key1][id=key1-"+ls_pto["option1"]+"]").prop('checked',true);
+          $("input[name=key1][id=key1-"+ls_pto["bluetoothEnabled"]+"]").prop('checked',true);
           $("input[name=key1]").checkboxradio('refresh');
         }
        }
