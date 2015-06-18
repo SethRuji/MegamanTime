@@ -1,7 +1,12 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "bluetoothEnabled": 3,
+        "hello": 0,
+        "powerUp": 2,
+        "testPost": 1
+    },
     "capabilities": [
-        ""
+        "configurable"
     ],
     "companyName": "hedgehogs265",
     "longName": "Megaman",

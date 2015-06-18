@@ -9,6 +9,7 @@ static TextLayer *s_peb_battery_layer;
 static TextLayer *s_bt_layer;
 static TextLayer *s_date_layer;
 
+
 static void battery_handler(BatteryChargeState new_state) {
   // Write to buffer and display
   static char s_battery_buffer[32];
@@ -138,6 +139,42 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 	update_time();
 }
   
+
+void process_tuple(Tuple *t){
+  int key = t->key;
+  int value = t->value->int32;
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Got key %d, value %d", key, value);
+  switch(key){
+    case 0:
+      APP_LOG(APP_LOG_LEVEL_INFO, "Got 'hello' message!");
+      break;
+    case 1:
+		 APP_LOG(APP_LOG_LEVEL_INFO, "Got 'testMessage' message!");
+      break;
+		case 2:
+			APP_LOG(APP_LOG_LEVEL_INFO, "Case2. Got settings key %d with val: %d", key, value);
+			bitmap_layer_set_bitmap(s_background_layer, s_background_bitmaps[value]);
+			break;
+		case 3:
+			APP_LOG(APP_LOG_LEVEL_INFO, "Case3. Got settings key %d with val: %d", key, value);
+			break;
+  }
+}
+ void inbox(DictionaryIterator *iter, void *context){
+  Tuple *t = dict_read_first(iter);
+  if(t){
+    process_tuple(t);
+  }
+  while(t != NULL){
+    t = dict_read_next(iter);
+    if(t){
+      process_tuple(t);
+    }
+  }
+}
+
+
+
 static void init() {
   // Create main Window element and assign to pointer
   s_main_window = window_create();
@@ -161,6 +198,10 @@ static void init() {
 	
 	// Subscribe to Bluetooth updates
   bluetooth_connection_service_subscribe(bt_handler);
+	
+	//setup app message handlers
+	app_message_register_inbox_received(inbox);
+	app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
 }
 
 static void deinit() {
