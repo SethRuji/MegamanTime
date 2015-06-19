@@ -36,18 +36,19 @@ static void main_window_load(Window *window) {
 	
 	// Create GBitmap, then set to created BitmapLayer
 	s_background_bitmaps[0] = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_MEGAMAN_JUMP);
-	s_background_bitmaps[1] = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_MEGAMAN_ICE);
-	s_background_layer = bitmap_layer_create(GRect(0, 0, 144, 140));
-	bitmap_layer_set_bitmap(s_background_layer, s_background_bitmaps[0]);
+	s_background_bitmaps[1] = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BACKGROUND_GUTSMAN);
+	s_background_layer = bitmap_layer_create(GRect(0, 0, 144, 168));
+	bitmap_layer_set_background_color(s_background_layer, GColorRed);
+	bitmap_layer_set_bitmap(s_background_layer, s_background_bitmaps[1]);
 	layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(s_background_layer));
 
 	// Create TIME TextLayer
-	s_time_layer = text_layer_create(GRect(10, 140, 139, 50));
+	s_time_layer = text_layer_create(GRect(0, 10, window_bounds.size.w,window_bounds.size.h));
 	text_layer_set_background_color(s_time_layer, GColorClear);
-	text_layer_set_text_color(s_time_layer, GColorBlue);
+	text_layer_set_text_color(s_time_layer, GColorWhite);
 
   //Set custom font
-	s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MEGAMAN_24));
+	s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MEGAMAN_22));
 	text_layer_set_font(s_time_layer, s_time_font);
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
 
@@ -55,11 +56,13 @@ static void main_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_time_layer));
 	
 	// Create DATE TextLayer
-	s_date_layer = text_layer_create(GRect(0, 120, window_bounds.size.w,20));
-	text_layer_set_background_color(s_date_layer, GColorWhite);
+	s_date_layer = text_layer_create(GRect(0, 30, window_bounds.size.w,20));
+	text_layer_set_background_color(s_date_layer, GColorClear);
 	text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);
 	// Add date_layer as a child layer to the Window's root layer
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
+	text_layer_set_text_color(s_date_layer, GColorWhite);
+
 	
 	// Create pebble BATTERY TextLayer
   s_peb_battery_layer = text_layer_create(GRect(30, 0, window_bounds.size.w,window_bounds.size.h));
@@ -124,11 +127,11 @@ static void update_time() {
     strftime(buffer, sizeof("00:00"), "%I:%M", tick_time);
   }
 	
-	if(tick_time->tm_min % 2 ==0){
-		bitmap_layer_set_bitmap(s_background_layer, s_background_bitmaps[0]);
-	}else{
-		bitmap_layer_set_bitmap(s_background_layer, s_background_bitmaps[1]);
-	}
+	//if(tick_time->tm_min % 2 ==0){
+		//bitmap_layer_set_bitmap(s_background_layer, s_background_bitmaps[0]);
+	//}else{
+		//bitmap_layer_set_bitmap(s_background_layer, s_background_bitmaps[1]);
+	//}
 
   // Display this time on the TextLayer
   text_layer_set_text(s_time_layer, buffer);

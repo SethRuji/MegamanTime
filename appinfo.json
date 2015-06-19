@@ -14,6 +14,16 @@
     "resources": {
         "media": [
             {
+                "file": "images/GutsmanBkgd.png",
+                "name": "IMAGE_BACKGROUND_GUTSMAN",
+                "type": "png"
+            },
+            {
+                "file": "images/ice2.png",
+                "name": "IMAGE_MEGAMAN_ICE_TRANS",
+                "type": "png"
+            },
+            {
                 "file": "images/ice.png",
                 "name": "IMAGE_MEGAMAN_ICE",
                 "type": "png"
@@ -25,12 +35,7 @@
             },
             {
                 "file": "fonts/megaman_2.ttf",
-                "name": "FONT_MEGAMAN_24",
-                "type": "font"
-            },
-            {
-                "file": "fonts/perfect-dos-vga.ttf",
-                "name": "FONT_PERFECT_DOS_48",
+                "name": "FONT_MEGAMAN_22",
                 "type": "font"
             }
         ]
