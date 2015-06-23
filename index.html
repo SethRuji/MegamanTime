@@ -94,10 +94,14 @@
           if (typeof window.localStorage !== "undefined") {
             window.localStorage.tutorial = ls_pto;
           }
+          
           var location = "pebblejs://close#" + ls_pto;
           console.log("Warping to: " + location);
           console.log(location);
           document.location = location;
+          
+          var return_to = getQueryParam('return_to', 'pebblejs://close#');
+          document.location = return_to + encodeURIComponent(location);
         });
       });
     </script>
