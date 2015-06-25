@@ -1,7 +1,10 @@
 {
     "appKeys": {
-        "bluetoothEnabled": 3,
+        "MSG_BATTERY_ANSWER": 5,
+        "MSG_BATTERY_REQUEST": 4,
+        "boss_level": 6,
         "hello": 0,
+        "phone_battery_enabled": 3,
         "powerUp": 2,
         "testPost": 1
     },
@@ -14,28 +17,98 @@
     "resources": {
         "media": [
             {
+                "file": "images/FiremanBkgd.png",
+                "name": "IMAGE_BACKGROUND_FIREMAN",
+                "type": "png"
+            },
+            {
+                "file": "images/CutmanBkgd.png",
+                "name": "IMAGE_BACKGROUND_CUTMAN",
+                "type": "png"
+            },
+            {
+                "file": "images/IcemanBkgd.png",
+                "name": "IMAGE_BACKGROUND_ICEMAN",
+                "type": "png"
+            },
+            {
+                "file": "images/BombmanBkgd.png",
+                "name": "IMAGE_BACKGROUND_BOMBMAN",
+                "type": "png"
+            },
+            {
+                "file": "images/megaman_guts.png",
+                "name": "IMAGE_MEGAMAN_SUPER_ARM",
+                "type": "png"
+            },
+            {
                 "file": "images/GutsmanBkgd.png",
                 "name": "IMAGE_BACKGROUND_GUTSMAN",
                 "type": "png"
             },
             {
-                "file": "images/ice2.png",
-                "name": "IMAGE_MEGAMAN_ICE_TRANS",
+                "file": "images/megaman_elec2.png",
+                "name": "IMAGE_MEGAMAN_ELEC",
                 "type": "png"
             },
             {
-                "file": "images/ice.png",
+                "file": "images/ElecmanBkgd.png",
+                "name": "IMAGE_BACKGROUND_ELECMAN",
+                "type": "png"
+            },
+            {
+                "file": "images/megaman_shoot.png",
+                "name": "IMAGE_MEGAMAN",
+                "type": "png"
+            },
+            {
+                "file": "images/megaman_cut.png",
+                "name": "IMAGE_MEGAMAN_CUT",
+                "type": "png"
+            },
+            {
+                "file": "images/megaman_fire.png",
+                "name": "IMAGE_MEGAMAN_FIRE",
+                "type": "png"
+            },
+            {
+                "file": "images/megaman_ice.png",
                 "name": "IMAGE_MEGAMAN_ICE",
                 "type": "png"
             },
             {
-                "file": "images/converted (2).png",
-                "name": "IMAGE_MEGAMAN_JUMP",
+                "file": "images/megaman_bomb.png",
+                "name": "IMAGE_MEGAMAN_BOMB",
+                "type": "png"
+            },
+            {
+                "file": "images/pebble battery.png",
+                "name": "IMAGE_PEBBLE_BATTERY",
+                "type": "png"
+            },
+            {
+                "file": "images/phone battery.png",
+                "name": "IMAGE_PHONE_BATTERY",
+                "type": "png"
+            },
+            {
+                "file": "images/megaman face.png",
+                "name": "IMAGE_BLUETOOTH_CONNECTED",
+                "type": "png"
+            },
+            {
+                "file": "images/megaman face crossed out.png",
+                "name": "IMAGE_BLUETOOTH_DISCONNECTED",
                 "type": "png"
             },
             {
                 "file": "fonts/megaman_2.ttf",
                 "name": "FONT_MEGAMAN_22",
+                "type": "font"
+            },
+            {
+                "file": "fonts/megaman_2.ttf",
+                "name": "FONT_MEGAMAN_8",
                 "type": "font"
             }
         ]
