@@ -94,7 +94,7 @@
       </div>
     </div><script type="text/javascript">
       function updateChoiceVisibility(){
-        console.log("radio button changed: " + $("input[name=key3]:checked").val());
+        //console.log("radio button changed: " + $("input[name=key3]:checked").val());
         if($("input[name=key3]:checked").val()==1){
           $("#power_up").hide();
           $("#boss_level").hide();
@@ -127,6 +127,8 @@
           $("input[name=key2]").checkboxradio('refresh');
           $("input[name=key3][id=key3-"+ls_pto["random_enabled"]+"]").prop('checked',true);
           $("input[name=key3]").checkboxradio('refresh');
+          
+          updateChoiceVisibility();
         }
        }
        
@@ -162,7 +164,6 @@
             }
             return default_ || false;
         }
-        updateChoiceVisibility();
       });
     </script>
   </div>
