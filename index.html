@@ -93,6 +93,16 @@
         </div>
       </div>
     </div><script type="text/javascript">
+      function updateChoiceVisibility(){
+        console.log("radio button changed: " + $("input[name=key3]:checked").val());
+        if($("input[name=key3]:checked").val()==1){
+          $("#power_up").hide();
+          $("#boss_level").hide();
+        }else{
+          $("#power_up").show();
+          $("#boss_level").show();
+        }
+      }
       function saveOptions() {
         var options = {
           'powerUp':     Number( $("input[name=key0]:checked").val() ),
@@ -104,9 +114,10 @@
       }
       $().ready(function() {
        if (typeof window.localStorage !== "undefined") {
-        console.log("Not undefined :)");
+        console.log("localStorage Not undefined");
         if (window.localStorage.tutorial) {
           ls_pto = JSON.parse(window.localStorage.tutorial);
+          console.log("loading settings: "+JSON.stringify(ls_pto));
           // the Pebble webview dies on the next line...
           $("input[name=key0][id=key0-"+ls_pto["powerUp"]+"]").prop('checked',true);
           $("input[name=key0]").checkboxradio('refresh');
@@ -118,17 +129,8 @@
           $("input[name=key3]").checkboxradio('refresh');
         }
        }
-
-      $("input[name=key3]").bind("change", function(){
-        console.log("radio button changed: " + $("input[name=key3]:checked").val());
-        if($("input[name=key3]:checked").val()==1){
-          $("#power_up").hide();
-          $("#boss_level").hide();
-        }else{
-          $("#power_up").show();
-          $("#boss_level").show();
-        }
-      }); 
+       
+       $("input[name=key3]").bind("change", updateChoiceVisibility);
        
         $("#b-cancel").click(function() {
           console.log("Cancel");
@@ -160,6 +162,7 @@
             }
             return default_ || false;
         }
+        updateChoiceVisibility();
       });
     </script>
   </div>
