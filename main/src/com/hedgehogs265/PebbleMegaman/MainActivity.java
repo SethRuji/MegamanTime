@@ -7,7 +7,6 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.view.Menu;
 
-import com.clusterrr.PebbleMario.R;
 import com.getpebble.android.kit.PebbleKit;
 import com.getpebble.android.kit.util.PebbleDictionary;
 
