@@ -17,7 +17,6 @@ static const int background_image_ids[NUM_LEVELS] = {
 																						RESOURCE_ID_IMAGE_BACKGROUND_BOMBMAN
                                             };
 
-
 static BitmapLayer *s_megaman_layer;
 static GBitmap *s_megaman_bitmap;
 static const int megaman_image_ids[7] = {																					
@@ -47,12 +46,14 @@ static TextLayer *s_date_layer;
 static GFont s_date_font;
 
 static int s_time_min;
+static int config_random_enabled;
 
 #define MSG_POWER_UP 2
 #define PHONE_BATTERY_ENABLED 3
 #define MSG_BATTERY_REQUEST 4
 #define MSG_BATTERY_ANSWER 5
 #define BOSS_LEVEL 6	
+#define RANDOM_ENABLED 7	
 	
 #define BATTERY_LEVEL_MAX_PIXELS 65
 
@@ -67,8 +68,7 @@ static void update_pebble_battery(Layer *layer, GContext *ctx) {
 	
   // Draw a black filled rectangle with sharp corners
   graphics_context_set_fill_color(ctx, GColorBlack);
-	float percentage = ((100.0-charge_state.charge_percent)/10.0)* 6.4;
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "percentage %d", (int)percentage);
+	float percentage = ((100.0-charge_state.charge_percent)/10.0)* 6.2;
 	graphics_fill_rect(ctx, GRect(0, 0, 11, percentage), 0, GCornerNone);
 }
 
@@ -79,12 +79,11 @@ static void update_phone_battery(Layer *layer, GContext *ctx) {
 	float percentage=BATTERY_LEVEL_MAX_PIXELS;
 	if(config_show_phone_battery==1){
 		if(phone_battery_level>=0){
-			percentage = (10.0-phone_battery_level)* 6.5;	
+			percentage = (10.0-phone_battery_level)* 6.2;	
 		}
 	}else{
 		//use Minutes remaining in hour as Boss HP
-		percentage = ((float)s_time_min/60.0)* 58;
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "time min: %d percentage:%d", (int)s_time_min, (int)percentage);
+		percentage = ((float)s_time_min/60.0)* 62;
 	}
 	layer_mark_dirty(s_phone_battery_cover_layer);
 
@@ -154,7 +153,7 @@ static void main_window_load(Window *window) {
 	text_layer_set_text_color(s_time_layer, GColorWhite);
 
   //Set custom font
-	s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MEGAMAN_22));
+	s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_MEGAMAN_19));
 	text_layer_set_font(s_time_layer, s_time_font);
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
 
@@ -172,7 +171,7 @@ static void main_window_load(Window *window) {
 	
 	// Create PEBBLE BATTERY Layer
 	s_pebble_battery_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_PEBBLE_BATTERY);
-	s_pebble_battery_layer = bitmap_layer_create(GRect(4, 0, 11, 72));
+	s_pebble_battery_layer = bitmap_layer_create(GRect(5, 0, 11, 72));
 	bitmap_layer_set_bitmap(s_pebble_battery_layer, s_pebble_battery_bitmap);
 	layer_add_child(window_layer, bitmap_layer_get_layer(s_pebble_battery_layer));
 	
@@ -260,7 +259,7 @@ static void update_time() {
     strftime(buffer, sizeof("00:00"), "%I:%M", tick_time);
   }
 	
-	if(tick_time->tm_min ==0){
+	if(config_random_enabled && tick_time->tm_min ==0){
 		//Every hour randomly choose a power up and a boss level
 		set_container_image(&s_background_bitmap, s_background_layer, background_image_ids[rand() % NUM_LEVELS], GRect(0, 0, 144, 168));
 		set_container_image(&s_megaman_bitmap, s_megaman_layer, megaman_image_ids[rand() % 7], GRect(-13, 51, 144, 168));
@@ -313,6 +312,10 @@ void process_tuple(Tuple *t){
 		case BOSS_LEVEL:
 			APP_LOG(APP_LOG_LEVEL_INFO, "Case6. Got boss %d with val: %d", key, value);
 			set_container_image(&s_background_bitmap, s_background_layer, background_image_ids[value], GRect(0, 0, 144, 168));
+			break;
+		case RANDOM_ENABLED:
+			APP_LOG(APP_LOG_LEVEL_INFO, "Case7. Got random enabled %d with val: %d", key, value);
+			config_random_enabled=value;
 			break;
   }
 }

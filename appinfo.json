@@ -17,13 +17,13 @@
     "resources": {
         "media": [
             {
-                "file": "images/FiremanBkgd.png",
-                "name": "IMAGE_BACKGROUND_FIREMAN",
+                "file": "images/CutmanBkgd.png",
+                "name": "IMAGE_BACKGROUND_CUTMAN",
                 "type": "png"
             },
             {
-                "file": "images/CutmanBkgd.png",
-                "name": "IMAGE_BACKGROUND_CUTMAN",
+                "file": "images/FiremanBkgd.png",
+                "name": "IMAGE_BACKGROUND_FIREMAN",
                 "type": "png"
             },
             {
@@ -103,12 +103,12 @@
             },
             {
                 "file": "fonts/megaman_2.ttf",
-                "name": "FONT_MEGAMAN_22",
+                "name": "FONT_MEGAMAN_8",
                 "type": "font"
             },
             {
                 "file": "fonts/megaman_2.ttf",
-                "name": "FONT_MEGAMAN_8",
+                "name": "FONT_MEGAMAN_19",
                 "type": "font"
             }
         ]
