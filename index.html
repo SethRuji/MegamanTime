@@ -24,31 +24,58 @@
     <div data-role="content">
       <div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini=
       "false">
-        <div data-role="collapsible">
-          <h3>General</h3>
-
+        <div data-role="collapsible" data-collapsed="false">
+          <h3>Settings</h3>
           <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+            <legend>Enable Randomized Face</legend>
+            <h2>Both megaman power up and boss randomize every hour</h2>
+              <input name="key3" id="key3-0" data-type="int" value="1" type="radio" /> 
+                <label for="key3-0">Enabled</label> 
+              <input name="key3" id="key3-1" data-type="int" value="0" checked="checked" type="radio" /> 
+                <label for="key3-1">Disabled</label>
+          </fieldset>
+          
+          <fieldset id="power_up" data-role="controlgroup" data-type="vertical" data-mini="true">
             <legend>Choose a power up!</legend> 
               <input name="key0" id="key0-0" data-type="int" value="0" checked="checked" type="radio" /> 
-                <label for="key0-0">Fire Storm</label> 
+                <label for="key0-0"><img src="assets/megaman_fire.png">Fire Storm</label> 
               <input name="key0" id="key0-1" data-type="int" value="1" type="radio" /> 
-                <label for="key0-1">Ice Slasher</label>
+                <label for="key0-1"><img src="assets/megaman_ice.png">Ice Slasher</label>
               <input name="key0" id="key0-2" data-type="int" value="2" type="radio" /> 
-                <label for="key0-2">Thunder Beam</label>
+                <label for="key0-2"><img src="assets/megaman_elec2.png">Thunder Beam</label>
               <input name="key0" id="key0-3" data-type="int" value="3" type="radio" /> 
-                <label for="key0-3">Hyper Bomb</label>
+                <label for="key0-3"><img src="assets/megaman_bomb.png">Hyper Bomb</label>
               <input name="key0" id="key0-4" data-type="int" value="4" type="radio"/> 
-                <label for="key0-4">Rolling Cutter <img src="images/Cutter.png" style="inline; background:rgb(120,120,120)"></label>
+                <label for="key0-4"><img src="assets/megaman_cut.png">Rolling Cutter </label>
               <input name="key0" id="key0-5" data-type="int" value="5" type="radio" /> 
-                <label for="key0-5">Super Arm</label>
+                <label for="key0-5"><img src="assets/megaman_guts.png">Super Arm</label>
+              <input name="key0" id="key0-6" data-type="int" value="6" type="radio" /> 
+                <label for="key0-6"><img src="assets/megaman_shoot.png">Buster</label>
           </fieldset>
-
+          
+          <fieldset id="boss_level" data-role="controlgroup" data-type="vertical" data-mini="true">
+            <legend>Choose a boss!</legend> 
+              <input name="key2" id="key2-0" data-type="int" value="0" checked="checked" type="radio" /> 
+                <label for="key2-0"><img src="assets/Elecman.png">Elecman</label> 
+              <input name="key2" id="key2-1" data-type="int" value="1" type="radio" /> 
+                <label for="key2-1"><img src="assets/Gutsman.png">Gutsman</label>
+              <input name="key2" id="key2-2" data-type="int" value="2" type="radio" /> 
+                <label for="key2-2"><img src="assets/Fireman.png">Fireman</label>
+              <input name="key2" id="key2-3" data-type="int" value="3" type="radio" /> 
+                <label for="key2-3"><img src="assets/Iceman.png">Iceman</label>
+              <input name="key2" id="key2-4" data-type="int" value="4" type="radio"/> 
+                <label for="key2-4"><img src="assets/Cutman.png">Cutman</label>
+              <input name="key2" id="key2-5" data-type="int" value="5" type="radio" /> 
+                <label for="key2-5"><img src="assets/Bombman.png">Bombman</label>
+          </fieldset>
+          
           <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
-            <legend>Show Phone Battery *Android APK Must Be installed</legend> 
-              <input name="key1" id="key1-0" data-type="int" value="1" checked="checked" type="radio" /> 
-                <label for="key1-0">Yes</label> 
-              <input name="key1" id="key1-1" data-type="int" value="0" type="radio" /> 
-                <label for="key1-1">No</label>
+            <legend>Show Phone Battery *Android APK Must Be installed</legend>
+            <h2><a href="MegamanTime.apk">Click here to download APK</a></h2>
+              <input name="key1" id="key1-0" data-type="int" value="1" type="radio" /> 
+                <label for="key1-0">Enabled</label> 
+              <input name="key1" id="key1-1" data-type="int" value="0" checked="checked" type="radio" /> 
+                <label for="key1-1">Disabled</label>
           </fieldset>
         </div><br />
 
@@ -68,7 +95,9 @@
       function saveOptions() {
         var options = {
           'powerUp':     Number( $("input[name=key0]:checked").val() ),
-          'phone_battery_enabled':     Number( $("input[name=key1]:checked").val() )
+          'phone_battery_enabled':     Number( $("input[name=key1]:checked").val() ),
+          'boss_level':     Number( $("input[name=key2]:checked").val() ),
+          'random_enabled': Number( $("input[name=key3]:checked").val() )
         }
         return options;
       }
@@ -80,10 +109,26 @@
           // the Pebble webview dies on the next line...
           $("input[name=key0][id=key0-"+ls_pto["powerUp"]+"]").prop('checked',true);
           $("input[name=key0]").checkboxradio('refresh');
-          $("input[name=key1][id=key1-"+ls_pto["bluetoothEnabled"]+"]").prop('checked',true);
+          $("input[name=key1][id=key1-"+ls_pto["phone_battery_enabled"]+"]").prop('checked',true);
           $("input[name=key1]").checkboxradio('refresh');
+          $("input[name=key2][id=key2-"+ls_pto["boss_level"]+"]").prop('checked',true);
+          $("input[name=key2]").checkboxradio('refresh');
+          $("input[name=key3][id=key3-"+ls_pto["random_enabled"]+"]").prop('checked',true);
+          $("input[name=key3]").checkboxradio('refresh');
         }
        }
+
+      $("input[name=key3]").bind("change", function(){
+        console.log("radio button changed: " + $("input[name=key3]:checked").val());
+        if($("input[name=key3]:checked").val()==1){
+          $("#power_up").hide();
+          $("#boss_level").hide();
+        }else{
+          $("#power_up").show();
+          $("#boss_level").show();
+        }
+      }); 
+       
         $("#b-cancel").click(function() {
           console.log("Cancel");
           document.location = "pebblejs://close";
